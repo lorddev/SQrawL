@@ -12,6 +12,8 @@ namespace Sqrawl.Core
         public Dictionary<string, Column> Columns { get; set; }
         public string TableName { get; }
 
+        internal SelectQuery Query { get; set; }
+
         public override string ToString()
         {
             return TableName;

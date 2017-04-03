@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Sqrawl.Core
@@ -10,8 +11,19 @@ namespace Sqrawl.Core
         private List<ISelectable> _selection = new List<ISelectable>();
         private Dictionary<string, Table> _tables = new Dictionary<string, Table>();
 
+        internal Dictionary<string, object> Criteria = new Dictionary<string, object>();
+
         public void AddColumn(Table table, string columnName)
         {
+            if (table.Query == null)
+            {
+                table.Query = this;
+            }
+            else if (table.Query != this)
+            {
+                throw new InvalidOperationException("This table instance belongs to another query.");
+            }
+
             _selection.Add(new Column(table, columnName));
             if (!_tables.ContainsKey(table.TableName))
             {
