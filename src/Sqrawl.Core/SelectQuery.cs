@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Sqrawl.Core
 {
     public class SelectQuery
     {
-        private List<ISelectable> _selection = new List<ISelectable>();
-        private Dictionary<string, Table> _tables = new Dictionary<string, Table>();
+        private readonly List<ISelectable> _selection = new List<ISelectable>();
+        private readonly Dictionary<string, Table> _tables = new Dictionary<string, Table>();
 
         internal Dictionary<string, object> Criteria = new Dictionary<string, object>();
 
