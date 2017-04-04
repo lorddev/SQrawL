@@ -1,0 +1,17 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">&lt;copyright file="$FILENAME$" company="Devlords Cooperative"&gt;&#xD;
+SQrawL is Open Source!&#xD;
+Copyright © 2017 Aaron Lord&#xD;
+Inspired by Java Squiggle library Copyright © 2004 Joe Walnes&#xD;
+&lt;/copyright&gt;&#xD;
+&lt;license type="GPL"&gt;&#xD;
+* This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public &#xD;
+  License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later &#xD;
+  version. &#xD;
+* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied &#xD;
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.&#xD;
+* You should have received a copy of the GNU General Public License along with this program.  If you've misplaced it, &#xD;
+  check out http://www.gnu.org/licenses/&#xD;
+&lt;/license&gt;&#xD;
+&lt;author&gt;$USER_NAME$&lt;/author&gt;&#xD;
+&lt;date&gt;$CREATED_MONTH$/$CREATED_DAY$/$CREATED_YEAR$&lt;/date&gt;</s:String></wpf:ResourceDictionary>

@@ -1,4 +1,4 @@
-﻿namespace Sqrawl.Core
+﻿namespace Devlord.Sqrawl
 {
     public interface ISelectable
     {

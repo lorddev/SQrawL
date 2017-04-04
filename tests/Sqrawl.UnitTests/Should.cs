@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Xunit;
 
-namespace Sqrawl.UnitTests
+namespace Devlord.Sqrawl.UnitTests
 {
     public static class Should
     {
@@ -10,9 +11,11 @@ namespace Sqrawl.UnitTests
             Assert.Equal(expected, actual);
         }
 
-        public static void ShouldApproximate(this string actual, string expected)
+        public static void ShouldResemble(this string actual, string expected)
         {
-            Assert.Equal(expected, actual, StringComparer.CurrentCultureIgnoreCase);
+            var whitespace = new Regex(@"\s+");
+            Assert.Equal(whitespace.Replace(expected, " "), whitespace.Replace(actual, " "),
+                StringComparer.CurrentCultureIgnoreCase);
         }
     }
 }

@@ -1,7 +1,7 @@
-ï»¿// <copyright file="Table.cs" company="Devlords Cooperative">
+// <copyright file="CriteriaExtensions.cs" company="Devlords Cooperative">
 // SQrawL is Open Source!
-// Copyright Â© 2017 Lord Design
-// Inspired by Java Squiggle library Copyright Â© 2004 Joe Walnes joe@truemesh.com
+// Copyright © 2017 Lord Design
+// Inspired by Java Squiggle library Copyright © 2004 Joe Walnes joe@truemesh.com
 // </copyright>
 // <license type="GPL">
 // * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public 
@@ -13,34 +13,15 @@
 //   check out http://www.gnu.org/licenses/
 // </license>
 // <author>Aaron Lord</author>
-// <date>03/13/2017</date>
-
-using System.Collections.Generic;
+// <date>04/03/2017</date>
 
 namespace Devlord.Sqrawl
 {
-    public class Table
+    public static class CriteriaExtensions
     {
-        public Table(string tableName)
+        public static Criteria<T> Where<T>(this Table table, Column column)
         {
-            TableName = tableName;
-        }
-
-        public Dictionary<string, Column> Columns { get; set; }
-        public string TableName { get; }
-
-        internal SelectQuery Query { get; set; }
-
-        public override string ToString()
-        {
-            return TableName;
-        }
-
-
-        public SelectQuery OrderBy(Column column, SortOrder order)
-        {
-            Query.AddOrderBy(column, order);
-            return Query;
+            return new Criteria<T>(table.Query, column);
         }
     }
 }

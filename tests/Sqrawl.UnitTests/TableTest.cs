@@ -1,7 +1,6 @@
 ﻿using Xunit;
-using Sqrawl.Core;
 
-namespace Sqrawl.UnitTests
+namespace Devlord.Sqrawl.UnitTests
 {
     public class TableTest
     {

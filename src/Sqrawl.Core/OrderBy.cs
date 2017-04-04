@@ -19,20 +19,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+#pragma warning disable S1450 // Always a false positive. I've posted in Sonar Google Group about it.
+
 namespace Devlord.Sqrawl
 {
     public class OrderBy : IQueryOutput
     {
-        private Dictionary<Column, SortOrder> _orderBy;
+        private readonly Dictionary<Column, SortOrder> _orderBy = new Dictionary<Column, SortOrder>();
+
+        public string ToString(IQueryOutput output)
+        {
+            return output.ToString();
+        }
+
         public void AddOrderBy(Column column, SortOrder order)
         {
-            if (_orderBy.IsNullOrEmpty())
-            {
-                _orderBy = new Dictionary<Column, SortOrder> { { column, order } };
-            }
-
             if (_orderBy.ContainsKey(column))
             {
+                // In case they're trying to change it in a roundabout way.
                 _orderBy[column] = order;
             }
             else
@@ -40,12 +44,12 @@ namespace Devlord.Sqrawl
                 _orderBy.Add(column, order);
             }
         }
-        
+
         public void Write(StringBuilder output)
         {
-            output.Append("order by ");
+            output.AppendLine().Append(" order by ");
 
-            int index = 0;
+            var index = 0;
             foreach (var pair in _orderBy)
             {
                 pair.Key.Write(output);
@@ -59,17 +63,11 @@ namespace Devlord.Sqrawl
                     output.Append(", ");
                 }
             }
-            
         }
 
         public void AddReferencedTablesTo(List<Table> tables)
         {
-           throw new NotImplementedException();
-        }
-
-        public string ToString(IQueryOutput output)
-        {
-            return output.ToString();
+            throw new NotImplementedException();
         }
     }
 }

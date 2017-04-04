@@ -1,4 +1,4 @@
-﻿// <copyright file="Criteria.cs" company="Devlords Cooperative">
+﻿// <copyright file="EnumerableExtensions.cs" company="Devlords Cooperative">
 // SQrawL is Open Source!
 // Copyright © 2017 Lord Design
 // Inspired by Java Squiggle library Copyright © 2004 Joe Walnes joe@truemesh.com
@@ -13,31 +13,18 @@
 //   check out http://www.gnu.org/licenses/
 // </license>
 // <author>Aaron Lord</author>
-// <date>03/14/2017</date>
-
-using System;
+// <date>04/03/2017</date>
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Devlord.Sqrawl
 {
-    public class Criteria<T>
+    public static class EnumerableExtensions
     {
-        private readonly SelectQuery _query;
-        private readonly Column _target;
-        private T _matchValue;
-
-        internal Criteria(SelectQuery query, Column target)
+        // TODO: should we move this to Devlord.Utilities?
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> target)
         {
-            _query = query;
-            _target = target;
-        }
-
-        // TODO: Need to rename this so it doesn't get confused with Object.Equals()
-        public SelectQuery Equals(T value)
-        {
-            _matchValue = value;
-            _query.Criteria.Add($"@{_target.Name.ToLowerInvariant()}_{Guid.NewGuid().ToString("N").Substring(0, 8)}",
-                value);
-            return _query;
+            return target == null || !target.Any();
         }
     }
 }
