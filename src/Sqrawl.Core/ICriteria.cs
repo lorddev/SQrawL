@@ -21,6 +21,6 @@ namespace Devlord.Sqrawl
 {
     public interface ICriteria : IQueryOutput
     {
-        void AddReferencedTables(List<Table> tables);
+        void AddReferencedTablesTo(List<Table> tables);
     }
 }

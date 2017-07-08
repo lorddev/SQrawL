@@ -23,13 +23,13 @@ using System.Text;
 
 namespace Devlord.Sqrawl
 {
-    public class Column : ISelectable
+    public class Column : ISelectable, IEquatable<Column>
     {
-        private readonly Table _table;
+        public Table Table { get; }
 
         public Column(Table table, string columnName)
         {
-            _table = table;
+            Table = table;
             Name = columnName;
         }
 
@@ -40,11 +40,26 @@ namespace Devlord.Sqrawl
             return ToString().GetHashCode();
         }
 
-        public override string ToString()
+        public bool Equals(Column other)
         {
-            return $"{_table.TableName}.{Name}";
+            return ToString().Equals(other.ToString());
         }
 
+        public override bool Equals(object other)
+        {
+            if (other is Column column)
+            {
+                return Equals(column);
+            }
+
+            return ReferenceEquals(other, this);
+        }
+
+        public override string ToString()
+        {
+            return $"{Table.Name}.{Name}";
+        }
+        
         public void AddReferencedTablesTo(List<Table> tables)
         {
             throw new NotImplementedException();

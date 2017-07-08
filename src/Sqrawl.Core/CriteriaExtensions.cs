@@ -23,5 +23,10 @@ namespace Devlord.Sqrawl
         {
             return new Criteria<T>(table.Query, column);
         }
+
+        public static Criteria<T> Where<T>(this Column column)
+        {
+            return new Criteria<T>(column.Table.Query, column);
+        }
     }
 }

@@ -19,24 +19,29 @@ using System;
 
 namespace Devlord.Sqrawl
 {
-    public class Criteria<T>
+    public abstract class Criteria
+    {
+        public Column Target { get; protected set; }
+
+        public string ParameterName { get; protected set; }
+    }
+
+    public class Criteria<T> : Criteria
     {
         private readonly SelectQuery _query;
-        private readonly Column _target;
         private T _matchValue;
-
+        
         internal Criteria(SelectQuery query, Column target)
         {
             _query = query;
-            _target = target;
+            Target = target;
+            ParameterName = $"@{Target.Name.ToLowerInvariant()}_{Math.Abs(Target.GetHashCode())}";
         }
-
-        // TODO: Need to rename this so it doesn't get confused with Object.Equals()
-        public SelectQuery Equals(T value)
+        
+        public SelectQuery Matches(T value)
         {
             _matchValue = value;
-            _query.Criteria.Add($"@{_target.Name.ToLowerInvariant()}_{Guid.NewGuid().ToString("N").Substring(0, 8)}",
-                value);
+            _query.Criteria.Add(this);
             return _query;
         }
     }

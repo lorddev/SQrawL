@@ -30,7 +30,7 @@ namespace Devlord.Sqrawl
 
         private readonly Dictionary<string, Table> _tables = new Dictionary<string, Table>();
 
-        internal Dictionary<string, object> Criteria = new Dictionary<string, object>();
+        internal List<Criteria> Criteria = new List<Criteria>();
 
         public OrderBy OrderBy { get; set; }
 
@@ -47,9 +47,9 @@ namespace Devlord.Sqrawl
 
             var column = new Column(table, columnName);
             _selection.Add(column);
-            if (!_tables.ContainsKey(table.TableName))
+            if (!_tables.ContainsKey(table.Name))
             {
-                _tables.Add(table.TableName, table);
+                _tables.Add(table.Name, table);
             }
 
             return column;
@@ -60,6 +60,8 @@ namespace Devlord.Sqrawl
             var query = new StringBuilder("SELECT ");
             query.Append(string.Join(",\r\n", _selection.Select(s => s.ToString())));
             query.Append(" FROM ");
+
+            // Todo: "ON" is required here.
             query.Append(string.Join(" JOIN ", _tables.Keys));
 
             //foreach (var table in _tables)
@@ -67,6 +69,18 @@ namespace Devlord.Sqrawl
             //    if (table)
             ////}
 
+            for (int i = 0; i < Criteria.Count; i++)
+            {
+                if (i == 0)
+                {
+                    query.Append(" WHERE ");
+                }
+
+                var item = Criteria.ElementAt(i);
+                query.Append(item.Target).Append(" = ").Append(item.ParameterName);
+            }
+            
+            
             OrderBy?.Write(query);
 
             return query.ToString();

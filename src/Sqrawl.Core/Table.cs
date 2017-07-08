@@ -21,19 +21,19 @@ namespace Devlord.Sqrawl
 {
     public class Table
     {
-        public Table(string tableName)
+        public Table(string name)
         {
-            TableName = tableName;
+            Name = name;
         }
 
         public Dictionary<string, Column> Columns { get; set; }
-        public string TableName { get; }
+        public string Name { get; }
 
         internal SelectQuery Query { get; set; }
 
         public override string ToString()
         {
-            return TableName;
+            return Name;
         }
 
 
